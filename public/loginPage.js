@@ -11,10 +11,13 @@ userForm.loginFormCallback = data => ApiConnector.login(data, response => {
 });
 
 userForm.registerFormCallback = data => ApiConnector.register(data, response => {
-    console.log(data);
-    if (!data.login.includes("@")) {
-        userForm.setRegisterErrorMessage("Поле 'Логин' должно содержать символ '@'")    
-    } else {
+    if (response.success === true) {
         location.reload();
+    // if (!data.login.includes("@")) {
+    //     userForm.setRegisterErrorMessage("Поле 'Логин' должно содержать символ '@'");
+    // } else {
+    //     location.reload();
+    } else {
+        userForm.setRegisterErrorMessage(response.error);
     }
 })
